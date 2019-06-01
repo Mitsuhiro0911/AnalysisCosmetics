@@ -1,9 +1,7 @@
 package application
 
-import org.dom4j.Document
 import org.dom4j.DocumentException
 import org.dom4j.Node
-import org.dom4j.io.SAXReader
 import java.io.IOException
 import kotlin.math.log10
 
@@ -19,16 +17,16 @@ fun main(args: Array<String>) {
 
     //素性ベクトルの型を作成
     val allComponents: List<Node> = Constants.cosmeProductCorpas.selectNodes("//component")
-    val list: MutableList<String> = mutableListOf()
+    val componentList: MutableList<String> = mutableListOf()
     for (component in allComponents) {
-        list.add(component.text)
+        componentList.add(component.text)
     }
     // listをログ出力
     val listHeading = "----cosme_product.xmlの成分を連結したリスト(重複排除前)----"
-    write.writeListLog(list, "data/log/1_word_list/word_list1.txt" , listHeading)
+    write.writeListLog(componentList, "data/log/1_word_list/word_list1.txt" , listHeading)
 
     // 同義語を統一する
-    val unifiedList: MutableList<String> = PreProcessing().unitySynonym(list)
+    val unifiedList: MutableList<String> = PreProcessing().unitySynonym(componentList)
 
     // unifiedListをログ出力
     val unifiedListHeading = "----cosme_product.xmlの成分一覧(重複排除後)----"
