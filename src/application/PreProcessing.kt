@@ -6,11 +6,8 @@ class PreProcessing{
     /**
      * 同義語辞書を用いて、表記揺れを解消する
      *
-     * @param [list]
-     * 			同義語の統一処理が行われる前のリスト
-     *
-     * @return [unifiedList]
-     *          同義語の統一処理が行われたリスト
+     * @param [list] 同義語の統一処理が行われる前のリスト
+     * @return [unifiedList] 同義語の統一処理が行われたリスト
      */
     fun unitySynonym(list: MutableList<String>): MutableList<String> {
 

@@ -12,11 +12,8 @@ class Calculator{
     /**
      * 2つの商品[x],[y]間のコサイン類似度を計算する
      *
-     * @param [x],[y]
-     * 			商品の素性ベクトル
-     *
-     * @return
-     *          商品同士のコサイン類似度
+     * @param[x],[y] 商品の素性ベクトル
+     * @return 商品同士のコサイン類似度
      */
     fun calCosSimilarity(x: DoubleArray, y: DoubleArray): Double{
         return this.cs.measure(DenseInstance(x), DenseInstance(y))
@@ -25,9 +22,10 @@ class Calculator{
     /**
      * 商品の素性ベクトルを計算する
      *
-     * @param
-     *
-     * @return
+     * @param[productNum] 全商品数
+     * @param[unifiedList] 洗顔料成分一覧(重複排除後)
+     * @param[idfMap] ある成分を含んでいる商品数で算出したIDF値のマップ
+     * @return 商品の素性ベクトル
      */
     fun calFeatureVector(productNum: Int, unifiedList: MutableList<String>, idfMap: LinkedHashMap<String, Double>): MutableList<LinkedHashMap<String, Double>>{
         val productMapList = mutableListOf<LinkedHashMap<String, Double>>()

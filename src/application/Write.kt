@@ -7,17 +7,13 @@ import java.io.FileWriter
 import java.io.PrintWriter
 
 class Write {
+
     /**
      * 受け取ったリストをログファイルに出力する
      *
-     * @param [list]
-     * 			ログに出力するリスト
-     *
-     * @param [path]
-     *          ログファイルのパス・名前
-     *
-     * @param [heading]
-     *          ログファイル1行目の見出し
+     * @param [list] ログに出力するリスト
+     * @param [path] ログファイルのパス・名前
+     * @param [heading] ログファイル1行目の見出し
      */
     fun writeListLog(list:MutableList<String>, path: String, heading: String){
         renameLog(path)
@@ -33,14 +29,9 @@ class Write {
     /**
      * 受け取ったマップをログファイルに出力する
      *
-     * @param [map]
-     * 			ログに出力するマップ
-     *
-     * @param [path]
-     *          ログファイルのパス・名前
-     *
-     * @param [heading]
-     *          ログファイル1行目の見出し
+     * @param [map] ログに出力するマップ
+     * @param [path] ログファイルのパス・名前
+     * @param [heading] ログファイル1行目の見出し
      */
     fun writeMapLog(map: LinkedHashMap<String, Double>, path: String, heading: String){
         renameLog(path)
@@ -56,14 +47,9 @@ class Write {
     /**
      * IDFによる重み付けをした各商品の素性ベクトルをログファイルに出力する
      *
-     * @param [productMapList]
-     * 			各商品の素性ベクトル
-     *
-     * @param [path]
-     *          ログファイルのパス・名前
-     *
-     * @param [heading]
-     *          ログファイル1行目の見出し
+     * @param [productMapList] 各商品の素性ベクトル
+     * @param [path] ログファイルのパス・名前
+     * @param [heading] ログファイル1行目の見出し
      */
     fun writeVectorLog(productMapList: MutableList<LinkedHashMap<String, Double>>, path: String, heading: String): Unit {
         renameLog(path)
@@ -103,8 +89,7 @@ class Write {
     /**
      * 各商品同士のコサイン類似度をMDS計算用のCSVファイルに出力する
      *
-     * @param [cosArray]
-     * 			各商品同士のコサイン類似度
+     * @param [cosArray] 各商品同士のコサイン類似度
      */
     fun writeCosineSimilarity(cosArray: Array<Array<Int?>>): Unit{
         val productNameList: List<Node> = Constants.cosmeProductCorpas.selectNodes("//product//name")
@@ -123,8 +108,7 @@ class Write {
     /**
      * LOG＿NUM回分の実行結果をログとして残すため、過去のログファイルをリネームする
      *
-     * @param [path]
-     * 			ログファイルのパス
+     * @param [path] ログファイルのパス
      */
     fun renameLog(path: String){
         val logList: MutableList<File> = mutableListOf()
