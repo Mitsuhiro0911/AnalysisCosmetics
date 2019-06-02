@@ -1,8 +1,6 @@
 package application
 
-import org.dom4j.Document
 import org.dom4j.Node
-import org.dom4j.io.SAXReader
 
 class PreProcessing{
     /**

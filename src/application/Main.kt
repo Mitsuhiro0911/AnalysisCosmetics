@@ -9,7 +9,6 @@ import kotlin.math.log10
 fun main(args: Array<String>) {
     val cal = Calculator()
     val write = Write()
-    //val document = Constants.reader.read("./data/corpas/cosme_product.xml")
     val idfMap: LinkedHashMap<String, Double> = linkedMapOf()
 
     val productCount: List<Node> = Constants.cosmeProductCorpas.selectNodes("//product")

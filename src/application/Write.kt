@@ -1,12 +1,11 @@
 package application
 
-import org.dom4j.Document
 import org.dom4j.Node
-import org.dom4j.io.SAXReader
 import java.io.BufferedWriter
 import java.io.File
 import java.io.FileWriter
 import java.io.PrintWriter
+
 class Write {
     /**
      * 受け取ったリストをログファイルに出力する
