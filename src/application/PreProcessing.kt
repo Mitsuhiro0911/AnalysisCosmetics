@@ -10,7 +10,6 @@ class PreProcessing{
      * @return [unifiedList] 同義語の統一処理が行われたリスト
      */
     fun unitySynonym(componentList: MutableList<String>): MutableList<String> {
-
         val unifiedList: MutableList<String> = mutableListOf()
         for (i in 0..componentList.size - 1) {
             val test: List<Node> =
