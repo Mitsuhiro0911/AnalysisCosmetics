@@ -10,8 +10,11 @@ fun main(args: Array<String>) {
     val cal = Calculator()
     val write = Write()
     val idfMap: LinkedHashMap<String, Double> = linkedMapOf()
+    // TODO:Calculater.ktにメソッドとして切り出す
     val productCount: List<Node> = Constants.cosmeProductCorpas.selectNodes("//product")
     val productNum = productCount.count()
+
+    // TODO:Parser.ktを作成し、メソッドとして切り出す
     // 素性ベクトルの型を作成
     val allComponents: List<Node> = Constants.cosmeProductCorpas.selectNodes("//component")
     val componentList: MutableList<String> = mutableListOf()
@@ -29,7 +32,7 @@ fun main(args: Array<String>) {
     val unifiedListHeading = "----cosme_product.xmlの成分一覧(重複排除後)----"
     write.writeListLog(unifiedList, "data/log/2_unified_word_list/unified_word_list1.txt", unifiedListHeading)
 
-    // 成分一覧から重複を排除し、重複数をカウントしている
+    // 重複数をカウントしてマップに情報を格納
     for (i in 0 until unifiedList.size) {
         val idf: Double = log10(productNum / unifiedList.count { it == unifiedList.get(i) }.toDouble())
         idfMap.set(unifiedList.get(i), idf)
@@ -64,6 +67,7 @@ fun main(args: Array<String>) {
         }
     }
     write.writeCosineSimilarity(cosArray)
+    // TODO:Write.ktにログ作成の大元のメソッドを作り、そこから各種ログ作成メソッドを呼び出す
     // 多次元尺度構成法(MDS)により商品同士のコサイン類似度を2次元にプロットするPythonプログラムを実行
     val p = Runtime.getRuntime().exec("python3 /Users/Nakamura/開発/退避用/mds.py ${productNum}" )
 }
