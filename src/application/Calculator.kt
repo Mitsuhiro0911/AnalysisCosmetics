@@ -10,6 +10,16 @@ class Calculator{
     private val cs = CosineSimilarity()
 
     /**
+     * cosme_product.xmlに登録されている商品数を計算する
+     *
+     * @return cosme_product.xmlに登録されている商品
+     */
+    fun calProductNum(): Int{
+        val productCount: List<Node> = Constants.cosmeProductCorpas.selectNodes("//product")
+        return productCount.count()
+    }
+
+    /**
      * 2つの商品[x],[y]間のコサイン類似度を計算する
      *
      * @param[x],[y] 商品の素性ベクトル
