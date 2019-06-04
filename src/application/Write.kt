@@ -9,6 +9,29 @@ import java.io.PrintWriter
 class Write {
 
     /**
+     * 受け取った変数をログファイルに出力する
+     *
+     * @param ログ出力の対象
+     */
+    fun writeLog(componentList: MutableList<String>, unifiedList: MutableList<String>, idfMap: LinkedHashMap<String, Double>, productMapList: MutableList<LinkedHashMap<String, Double>>){
+        // componentListをログ出力
+        val listHeading = "----cosme_product.xmlの成分を連結したリスト(重複排除前)----"
+        writeListLog(componentList, "data/log/1_word_list/word_list1.txt" , listHeading)
+
+        // unifiedListをログ出力
+        val unifiedListHeading = "----cosme_product.xmlの成分一覧(重複排除後)----"
+        writeListLog(unifiedList, "data/log/2_unified_word_list/unified_word_list1.txt", unifiedListHeading)
+
+        // idfMapをログ出力
+        val idfMapHeading = "----IDF(log 全商品数➗その成分が含まれる商品数)----"
+        writeMapLog(idfMap, "data/log/3_idf/idf1.txt", idfMapHeading)
+
+        // 素性ベクトルをログに出力
+        val productMapListHeading = "----各商品の素性ベクトル----"
+        writeVectorLog(productMapList, "data/log/4_feature_vector/feature_vector1.txt", productMapListHeading)
+    }
+
+    /**
      * 受け取ったリストをログファイルに出力する
      *
      * @param [list] ログに出力するリスト
