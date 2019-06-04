@@ -9,7 +9,6 @@ import kotlin.math.log10
 fun main(args: Array<String>) {
     val cal = Calculator()
     val write = Write()
-    val idfMap: LinkedHashMap<String, Double> = linkedMapOf()
 
     val productNum = cal.calProductNum()
 
@@ -31,12 +30,7 @@ fun main(args: Array<String>) {
     val unifiedListHeading = "----cosme_product.xmlの成分一覧(重複排除後)----"
     write.writeListLog(unifiedList, "data/log/2_unified_word_list/unified_word_list1.txt", unifiedListHeading)
 
-    // TODO:Calculater.ktにメソッドとして切り出す
-    // 重複数をカウントしてマップに情報を格納
-    for (i in 0 until unifiedList.size) {
-        val idf: Double = log10(productNum / unifiedList.count { it == unifiedList.get(i) }.toDouble())
-        idfMap.set(unifiedList.get(i), idf)
-    }
+    val idfMap: LinkedHashMap<String, Double> = cal.calIDF(productNum, unifiedList)
 
     // idfMapをログ出力
     val idfMapHeading = "----IDF(log 全商品数➗その成分が含まれる商品数)----"

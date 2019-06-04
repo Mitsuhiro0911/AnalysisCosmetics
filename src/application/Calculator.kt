@@ -5,6 +5,7 @@ import net.sf.javaml.distance.CosineSimilarity
 import org.dom4j.Document
 import org.dom4j.Node
 import org.dom4j.io.SAXReader
+import kotlin.math.log10
 
 class Calculator{
     private val cs = CosineSimilarity()
@@ -17,6 +18,23 @@ class Calculator{
     fun calProductNum(): Int{
         val productCount: List<Node> = Constants.cosmeProductCorpas.selectNodes("//product")
         return productCount.count()
+    }
+
+    /**
+     * ある成分を含んでいる商品数で算出したIDF値のマップを返す
+     *
+     * @param[productNum] 全商品数
+     * @param[unifiedList] 洗顔料成分一覧(重複排除後)
+     * @return ある成分を含んでいる商品数で算出したIDF値のマップ
+     */
+    fun calIDF(productNum: Int, unifiedList: MutableList<String>): LinkedHashMap<String, Double>{
+        val idfMap: LinkedHashMap<String, Double> = linkedMapOf()
+        // 重複数をカウントしてマップに情報を格納
+        for (i in 0 until unifiedList.size) {
+            val idf: Double = log10(productNum / unifiedList.count { it == unifiedList.get(i) }.toDouble())
+            idfMap.set(unifiedList.get(i), idf)
+        }
+        return idfMap
     }
 
     /**
