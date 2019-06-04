@@ -41,7 +41,7 @@ fun main(args: Array<String>) {
             }
             if (cosArray[i][j] == null) {
                 cosArray[i][j] = (cal.calCosSimilarity(vector1, vector2) * Constants.NORM).toInt()
-                cosArray[j][i] = (cal.calCosSimilarity(vector1, vector2) * Constants.NORM).toInt()
+                cosArray[j][i] = cosArray[i][j]
             }
         }
     }
