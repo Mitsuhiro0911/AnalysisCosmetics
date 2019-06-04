@@ -8,22 +8,22 @@ import java.io.IOException
 fun main(args: Array<String>) {
     val cal = Calculator()
     val write = Write()
-
+    // コーパスの商品数を計算
     val productNum = cal.calProductNum()
 
     // TODO:Parser.ktを作成し、メソッドとして切り出す
-    // 素性ベクトルの型を作成
+    // 全成分情報を抽出
     val allComponents: List<Node> = Constants.cosmeProductCorpas.selectNodes("//component")
     val componentList: MutableList<String> = mutableListOf()
     for (component in allComponents) {
         componentList.add(component.text)
     }
 
-    // 同義語を統一する
+    // 抽出した全成分情報に同義語統一処理を行う
     val unifiedList: MutableList<String> = PreProcessing().unitySynonym(componentList)
-
+    // 成分を含有する商品数の尺度でIDF値を計算
     val idfMap: LinkedHashMap<String, Double> = cal.calIDF(productNum, unifiedList)
-
+    // 商品ごとの素性ベクトルを計算
     val productMapList = cal.calFeatureVector(productNum, unifiedList, idfMap)
 
     // Java-mlでクラスタリグする際に用いる.dataファイルを出力する
