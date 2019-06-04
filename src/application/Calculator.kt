@@ -2,9 +2,7 @@ package application
 
 import net.sf.javaml.core.DenseInstance
 import net.sf.javaml.distance.CosineSimilarity
-import org.dom4j.Document
 import org.dom4j.Node
-import org.dom4j.io.SAXReader
 import kotlin.math.log10
 
 class Calculator{
