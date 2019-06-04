@@ -10,15 +10,8 @@ fun main(args: Array<String>) {
     val write = Write()
     // コーパスの商品数を計算
     val productNum = cal.calProductNum()
-
-    // TODO:Parser.ktを作成し、メソッドとして切り出す
     // 全成分情報を抽出
-    val allComponents: List<Node> = Constants.cosmeProductCorpas.selectNodes("//component")
-    val componentList: MutableList<String> = mutableListOf()
-    for (component in allComponents) {
-        componentList.add(component.text)
-    }
-
+    val componentList: MutableList<String> = Parser().extractAllComponent()
     // 抽出した全成分情報に同義語統一処理を行う
     val unifiedList: MutableList<String> = PreProcessing().unitySynonym(componentList)
     // 成分を含有する商品数の尺度でIDF値を計算
@@ -31,6 +24,7 @@ fun main(args: Array<String>) {
 
     // 二次元配列
     val cosArray = Array(productMapList.size, { arrayOfNulls<Int>(productMapList.size) })
+    // 商品の全組合せのコサイン類似度を計算
     for (i in 0 until productMapList.size) {
         val vector1 = productMapList.get(i).values.toDoubleArray()
         for (j in 0 until productMapList.size) {
@@ -45,6 +39,7 @@ fun main(args: Array<String>) {
             }
         }
     }
+
     write.writeLog(componentList, componentList, idfMap, productMapList)
     write.writeCosineSimilarity(cosArray)
     // 多次元尺度構成法(MDS)により商品同士のコサイン類似度を2次元にプロットするPythonプログラムを実行
