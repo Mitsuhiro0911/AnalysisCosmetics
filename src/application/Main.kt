@@ -39,7 +39,7 @@ fun main(args: Array<String>) {
         }
     }
 
-    write.writeLog(componentList, componentList, idfMap, productMapList)
+    write.writeLog(componentList, unifiedList, idfMap, productMapList)
     write.writeCosineSimilarity(cosArray)
     // 多次元尺度構成法(MDS)により商品同士のコサイン類似度を2次元にプロットするPythonプログラムを実行
     val p = Runtime.getRuntime().exec("python3 /Users/Nakamura/開発/退避用/mds.py ${productNum}" )
