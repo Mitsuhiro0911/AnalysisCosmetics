@@ -15,11 +15,11 @@ class Write {
      */
     fun writeLog(componentList: MutableList<String>, unifiedList: MutableList<String>, idfMap: LinkedHashMap<String, Double>, productMapList: MutableList<LinkedHashMap<String, Double>>){
         // componentListをログ出力
-        val listHeading = "----cosme_product.xmlの成分を連結したリスト(重複排除前)----"
+        val listHeading = "----cosme_product.xmlの成分を連結したリスト(同義語統一前・重複排除前)----"
         writeListLog(componentList, "data/log/1_word_list/word_list1.txt" , listHeading)
 
         // unifiedListをログ出力
-        val unifiedListHeading = "----cosme_product.xmlの成分一覧(重複排除後)----"
+        val unifiedListHeading = "----cosme_product.xmlの成分一覧(同義語統一後・重複排除前)----"
         writeListLog(unifiedList, "data/log/2_unified_word_list/unified_word_list1.txt", unifiedListHeading)
 
         // idfMapをログ出力
