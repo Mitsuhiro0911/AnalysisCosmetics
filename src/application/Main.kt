@@ -40,8 +40,9 @@ fun main(args: Array<String>) {
             if (cosArray[i][j] == null) {
                 cosArray[i][j] = (cal.calCosSimilarity(vector1, vector2) * Constants.NORM).toInt()
                 cosArray[j][i] = cosArray[i][j]
-                reciprocalCosArray[i][j] = (1.0 / cal.calCosSimilarity(vector1, vector2)).toInt()
+                reciprocalCosArray[i][j] = ((1.0 - cal.calCosSimilarity(vector1, vector2)) * 100).toInt()
                 reciprocalCosArray[j][i] = reciprocalCosArray[i][j]
+                println(1.0 - cal.calCosSimilarity(vector1, vector2))
             }
         }
     }
