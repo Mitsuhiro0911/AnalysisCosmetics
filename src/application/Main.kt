@@ -2,6 +2,8 @@ package application
 
 import org.dom4j.DocumentException
 import java.io.IOException
+import kotlin.math.log10
+import kotlin.math.sqrt
 
 @Throws(DocumentException::class, IOException::class)
 fun main(args: Array<String>) {
@@ -23,6 +25,8 @@ fun main(args: Array<String>) {
 
     // 二次元配列
     val cosArray = Array(productMapList.size, { arrayOfNulls<Int>(productMapList.size) })
+    // コサイン類似度の逆数を計算した二次元配列
+    val reciprocalCosArray = Array(productMapList.size, { arrayOfNulls<Int>(productMapList.size) })
     // 商品の全組合せのコサイン類似度を計算
     for (i in 0 until productMapList.size) {
         val vector1 = productMapList.get(i).values.toDoubleArray()
@@ -30,17 +34,20 @@ fun main(args: Array<String>) {
             val vector2 = productMapList.get(j).values.toDoubleArray()
             if (i == j) {
                 cosArray[i][j] = 0
+                reciprocalCosArray[i][j] = 0
                 break
             }
             if (cosArray[i][j] == null) {
                 cosArray[i][j] = (cal.calCosSimilarity(vector1, vector2) * Constants.NORM).toInt()
                 cosArray[j][i] = cosArray[i][j]
+                reciprocalCosArray[i][j] = (1.0 / cal.calCosSimilarity(vector1, vector2)).toInt()
+                reciprocalCosArray[j][i] = reciprocalCosArray[i][j]
             }
         }
     }
 
     write.writeLog(componentList, unifiedList, idfMap, productMapList)
-    write.writeCosineSimilarity(cosArray)
+    write.writeCosineSimilarity(reciprocalCosArray)
     // 多次元尺度構成法(MDS)により商品同士のコサイン類似度を2次元にプロットするPythonプログラムを実行
     val p = Runtime.getRuntime().exec("python3 /Users/Nakamura/開発/退避用/mds.py ${productNum}" )
 }
